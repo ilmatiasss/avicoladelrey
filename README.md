@@ -23,7 +23,14 @@ Edita la parte superior de `js/app.js`:
 
 ## Imágenes
 
-`assets/img/` contiene el logo, la escena del encabezado y las fotos de bandejas y cajas, todas recortadas del afiche original (`assets/flyer.jpg`). Si consigues versiones en mayor resolución (por ejemplo, el logo original del diseñador), reemplaza estos archivos manteniendo el mismo nombre.
+`assets/img/` contiene el logo, la escena del encabezado y las fotos de bandejas y cajas, recortadas del afiche original (`assets/flyer.jpg`).
+
+El logo fue escalado con IA (Real-ESRGAN, dos pasadas ×4) y recortado con fondo transparente:
+
+- `marca/logo-avicola-del-rey-uhd.png`: versión maestra de 3240 × 3629 px, para imprenta, redes sociales o etiquetas.
+- `assets/img/logo.webp` (1200 px) y `assets/img/logo-sm.webp` (256 px): versiones livianas que usa la página.
+
+Si consigues el archivo original del diseñador, reemplaza estos archivos manteniendo el mismo nombre.
 
 ## Publicar
 

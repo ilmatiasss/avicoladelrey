@@ -310,15 +310,18 @@
   }
 
   /* ------------------------------------------------------------------
-     Banner: partículas doradas
+     Banner: mini huevitos que suben
      ------------------------------------------------------------------ */
 
   const dust = $('[data-dust]');
   if (dust && !reduceMotion) {
-    dust.innerHTML = Array.from({ length: 18 }, () => {
-      const size = (2 + Math.random() * 4).toFixed(1);
-      return `<i style="left:${(Math.random() * 100).toFixed(1)}%;width:${size}px;height:${size}px;` +
-        `animation-duration:${(7 + Math.random() * 8).toFixed(1)}s;animation-delay:-${(Math.random() * 12).toFixed(1)}s"></i>`;
+    const rnd = (min, max) => (min + Math.random() * (max - min)).toFixed(1);
+    dust.innerHTML = Array.from({ length: 16 }, () => {
+      const w = rnd(7, 15);
+      const r0 = rnd(-40, 40);
+      return `<i class="${Math.random() < .3 ? 'is-white' : ''}" style="left:${rnd(0, 100)}%;width:${w}px;height:${(w * 1.28).toFixed(1)}px;` +
+        `--r0:${r0}deg;--r1:${(+r0 + +rnd(-160, 160)).toFixed(1)}deg;--sway:${rnd(-30, 30)}px;` +
+        `animation-duration:${rnd(8, 15)}s;animation-delay:-${rnd(0, 14)}s"></i>`;
     }).join('');
   }
 
