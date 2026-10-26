@@ -141,52 +141,43 @@
      Productos
      ------------------------------------------------------------------ */
 
+  const TRAY_IMG = { tercera: 'segunda', segunda: 'segunda', primera: 'primera', extra: 'extra', super: 'super', jumbo: 'jumbo' };
+
   function trayCard(p) {
     const c = CALIBRES[p.cal];
     return `
-      <article class="card" data-id="${p.id}">
+      <article class="tray product" data-id="${p.id}">
         ${p.promo ? '<span class="badge">Promoción</span>' : ''}
-        <div class="card__top">
-          <div>
-            <p class="card__kicker">Bandeja</p>
-            <h3 class="card__name">${c.name}</h3>
-            <p class="card__meta"><b>${p.eggs} huevos</b> · ${c.range}</p>
-          </div>
-          <div class="card__egg">${eggSVG(p.cal, 46)}</div>
-        </div>
-        <div class="card__price">
-          <span class="card__amount">${clp(p.price)}</span>
-          <span class="card__unit">${clp(p.price / p.eggs)} por huevo</span>
-        </div>
-        <div class="card__foot" data-foot></div>
+        <img class="tray__img" src="assets/img/bandeja-${TRAY_IMG[p.cal]}.jpg" alt="Bandeja de huevos ${c.name}" width="336" height="234" loading="lazy">
+        <h3 class="p-name">${c.name}</h3>
+        <p class="p-qty">${p.eggs} huevos</p>
+        <p class="p-grams">(${c.range})</p>
+        <div class="tray__price">${clp(p.price)}<span class="tray__unit">${clp(p.price / p.eggs)} por huevo</span></div>
+        <div class="tray__action" data-foot></div>
       </article>`;
   }
 
   function boxCard(p) {
     const c = CALIBRES[p.cal];
     return `
-      <article class="card card--box" data-id="${p.id}">
-        <div class="card__top">
-          <div>
-            <p class="card__kicker">Caja</p>
-            <h3 class="card__name">${c.name}</h3>
-            <p class="card__meta"><b>${p.eggs} huevos</b> · ${c.range}</p>
-          </div>
-          <div class="box-art"><svg class="icon"><use href="#i-box"/></svg></div>
+      <article class="box-row product" data-id="${p.id}">
+        <img class="box-row__img" src="assets/img/caja-${p.eggs}.jpg" alt="Caja Avícola del Rey de ${p.eggs} huevos" width="356" height="238" loading="lazy">
+        <div class="box-row__info">
+          <h3 class="p-name">${c.name}</h3>
+          <p class="p-qty">${p.eggs} huevos</p>
+          <p class="p-grams">(${c.range})</p>
         </div>
-        <div class="tiers">
-          <div class="tier" data-tier="wholesale">
-            <span class="tier__label">Mayorista</span>
-            <span class="tier__amount">${clp(p.wholesale)}</span>
-            <span class="tier__unit">${clp(p.wholesale / p.eggs)} por huevo</span>
-          </div>
-          <div class="tier" data-tier="retail">
-            <span class="tier__label">Detalle</span>
-            <span class="tier__amount">${clp(p.retail)}</span>
-            <span class="tier__unit">${clp(p.retail / p.eggs)} por huevo</span>
-          </div>
+        <div class="price-box price-box--wh" data-tier="wholesale">
+          <span class="price-box__label">Mayorista · 2+ cajas</span>
+          <span class="price-box__amount">${clp(p.wholesale)}</span>
+          <span class="price-box__unit">${clp(p.wholesale / p.eggs)} por huevo</span>
         </div>
-        <div class="card__foot" data-foot></div>
+        <div class="price-box price-box--rt" data-tier="retail">
+          <span class="price-box__label">Detalle · 1 caja</span>
+          <span class="price-box__amount">${clp(p.retail)}</span>
+          <span class="price-box__unit">${clp(p.retail / p.eggs)} por huevo</span>
+        </div>
+        <div class="box-row__action" data-foot></div>
       </article>`;
   }
 
@@ -194,7 +185,7 @@
   $('[data-products="cajas"]').innerHTML = BOXES.map(boxCard).join('');
 
   function renderCards(s) {
-    for (const card of $$('.card[data-id]')) {
+    for (const card of $$('.product[data-id]')) {
       const id = card.dataset.id;
       const p = PRODUCTS[id];
       const qty = cart[id] || 0;
@@ -202,32 +193,39 @@
       card.classList.toggle('is-in-cart', qty > 0);
 
       if (p.type === 'box') {
-        $('[data-tier="wholesale"]', card).classList.toggle('is-active', s.wholesale);
-        $('[data-tier="retail"]', card).classList.toggle('is-active', !s.wholesale);
+        const wh = $('[data-tier="wholesale"]', card);
+        const rt = $('[data-tier="retail"]', card);
+        // Marca el precio que se está cobrando, solo en las cajas que están en el pedido
+        wh.classList.toggle('is-active', qty > 0 && s.wholesale);
+        rt.classList.toggle('is-active', qty > 0 && !s.wholesale);
+        rt.classList.toggle('is-dim', s.wholesale);
       }
 
       const state = qty > 0 ? 'qty' : 'add';
       if (foot.dataset.state !== state) {
         foot.dataset.state = state;
         foot.innerHTML = state === 'add'
-          ? `<button class="btn btn--primary add-btn" type="button" data-add>Agregar al pedido</button>`
+          ? `<button class="btn btn--gold btn--sm" type="button" data-add>Agregar</button>`
           : `<div class="stepper" role="group" aria-label="Cantidad de ${productName(p)}">
                <button type="button" data-dec aria-label="Quitar uno">−</button>
                <output data-qty></output>
                <button type="button" data-inc aria-label="Agregar uno">+</button>
              </div>
-             <span class="card__line" data-line></span>`;
+             ${p.type === 'box' ? '<span class="box-row__line" data-line></span>' : ''}`;
       }
       if (state === 'qty') {
-        const unit = p.type === 'tray' ? p.price : (s.wholesale ? p.wholesale : p.retail);
         $('[data-qty]', foot).textContent = qty;
-        $('[data-line]', foot).innerHTML = `En tu pedido · <b>${clp(unit * qty)}</b>`;
+        const line = $('[data-line]', foot);
+        if (line) {
+          const unit = s.wholesale ? p.wholesale : p.retail;
+          line.innerHTML = `En tu pedido · <b>${clp(unit * qty)}</b>`;
+        }
       }
     }
   }
 
   document.addEventListener('click', e => {
-    const card = e.target.closest('.card[data-id]');
+    const card = e.target.closest('.product[data-id]');
     if (!card) return;
     const id = card.dataset.id;
     if (e.target.closest('[data-add]')) {
@@ -239,30 +237,6 @@
       setQty(id, (cart[id] || 0) - 1);
       if (!cart[id]) $('[data-add]', card)?.focus();
     }
-  });
-
-  /* ------------------------------------------------------------------
-     Pestañas
-     ------------------------------------------------------------------ */
-
-  const tabs = $$('[data-tab]');
-  function selectTab(tab) {
-    for (const t of tabs) {
-      const active = t === tab;
-      t.classList.toggle('is-active', active);
-      t.setAttribute('aria-selected', active);
-      t.tabIndex = active ? 0 : -1;
-      $('#' + t.getAttribute('aria-controls')).hidden = !active;
-    }
-  }
-  tabs.forEach((tab, i) => {
-    tab.addEventListener('click', () => selectTab(tab));
-    tab.addEventListener('keydown', e => {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
-      selectTab(next);
-      next.focus();
-    });
   });
 
   /* ------------------------------------------------------------------
@@ -337,6 +311,10 @@
     lastFocus?.focus?.();
   }
   $$('[data-open-cart]').forEach(b => b.addEventListener('click', openCart));
+  // "Hacer mi pedido": abre el carrito si ya tiene productos; si no, baja a los precios
+  $$('[data-open-cart-if-items]').forEach(a => a.addEventListener('click', e => {
+    if (summary().items > 0) { e.preventDefault(); openCart(); }
+  }));
   $$('[data-close-cart]').forEach(b => b.addEventListener('click', closeCart));
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeCart();
@@ -416,6 +394,7 @@
     renderCart(s);
     $$('[data-cart-count]').forEach(el => { el.textContent = s.items; });
     $('[data-cart-total]').textContent = clp(s.subtotal);
+    $('[data-cart-items]').textContent = `${s.items} producto${s.items === 1 ? '' : 's'}`;
     $('.mobile-bar').hidden = s.items === 0;
     document.body.classList.toggle('has-cart', s.items > 0);
   }

@@ -18,6 +18,10 @@ Edita la parte superior de `js/app.js`:
 - `TRAYS` y `BOXES`: precios y productos.
 - `COMUNAS_IN` y `COMUNAS_PARTIAL`: zona de despacho.
 
+## Imágenes
+
+`assets/img/` contiene el logo, la escena del encabezado y las fotos de bandejas y cajas, todas recortadas del afiche original (`assets/flyer.jpg`). Si consigues versiones en mayor resolución (por ejemplo, el logo original del diseñador), reemplaza estos archivos manteniendo el mismo nombre.
+
 ## Publicar
 
 Al ser un sitio estático, basta con subir la carpeta a GitHub Pages, Netlify o Vercel. Para probar localmente, abre `index.html` en el navegador.

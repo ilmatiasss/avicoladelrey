@@ -3,72 +3,61 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Avícola del Rey · Huevos frescos a domicilio en Santiago</title>
+  <title>Avícola del Rey · Huevos de calidad para tu mesa</title>
   <meta name="description" content="Huevos de gallinas ponedoras por bandeja o por caja. Precios mayoristas desde 2 cajas y envío gratis a comunas de Santiago dentro del Anillo Américo Vespucio.">
-  <meta name="theme-color" content="#1d1813">
+  <meta name="theme-color" content="#0c0a08">
   <meta property="og:title" content="Avícola del Rey · Huevos de calidad para tu mesa">
   <meta property="og:description" content="Bandejas desde $3.900. Envío gratis desde 3 bandejas o 1 caja dentro del Anillo Vespucio.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/flyer.jpg">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- Símbolos reutilizables -->
+  <!-- Íconos -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
       <radialGradient id="g-shell" cx="38%" cy="32%" r="75%">
-        <stop offset="0" stop-color="#f3d2ad"/>
-        <stop offset=".55" stop-color="#dba574"/>
-        <stop offset="1" stop-color="#b9774a"/>
+        <stop offset="0" stop-color="#f6d3ab"/>
+        <stop offset=".55" stop-color="#dc9a62"/>
+        <stop offset="1" stop-color="#a9643a"/>
       </radialGradient>
-      <radialGradient id="g-cup" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="#bfae94"/>
-        <stop offset=".8" stop-color="#d9cbb3"/>
-        <stop offset="1" stop-color="#e6dac6"/>
-      </radialGradient>
-      <g id="cup"><circle r="33" fill="url(#g-cup)"/></g>
-      <g id="egg">
-        <ellipse rx="25" ry="29" fill="url(#g-shell)"/>
-        <ellipse rx="7" ry="9" cx="-8" cy="-11" fill="#fff" opacity=".28"/>
-      </g>
     </defs>
-    <symbol id="i-cart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 4h2l2.2 10.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6.2"/><circle cx="9.5" cy="19.5" r="1.3" fill="currentColor"/><circle cx="17" cy="19.5" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M3 4h2l2.2 10.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6.2"/><circle cx="9.5" cy="19.5" r="1.3" fill="currentColor"/><circle cx="17" cy="19.5" r="1.3" fill="currentColor"/></symbol>
     <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2A9.8 9.8 0 0 0 3.6 17l-1.3 4.8 4.9-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 5 5 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1l-.5-.3Z"/></symbol>
-    <symbol id="i-truck" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3.2v2.8h-7z"/><circle cx="6.5" cy="17.5" r="1.8" fill="var(--paper)" stroke="currentColor" stroke-width="1.7"/><circle cx="17" cy="17.5" r="1.8" fill="var(--paper)" stroke="currentColor" stroke-width="1.7"/></symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
-    <symbol id="i-box" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M3.5 7.5 12 3.5l8.5 4v9L12 20.5l-8.5-4zM3.5 7.5 12 11.5l8.5-4M12 11.5v9"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 32 24"><path fill="currentColor" d="M1 4.5A1.5 1.5 0 0 1 2.5 3h15A1.5 1.5 0 0 1 19 4.5V7h5.2a2 2 0 0 1 1.6.8l3.8 5a2 2 0 0 1 .4 1.2V18a1 1 0 0 1-1 1h-1.6a3.5 3.5 0 0 1-6.8 0h-7.2a3.5 3.5 0 0 1-6.8 0H2.5A1.5 1.5 0 0 1 1 17.5Zm20 4.5v4h6l-3-4ZM8 16.8a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Zm15 0a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3.5 7.5 12 3.5l8.5 4v9L12 20.5l-8.5-4zM3.5 7.5 12 11.5l8.5-4M12 11.5v9M7.8 5.5l8.5 4"/></symbol>
+    <symbol id="i-tray" viewBox="0 0 32 24"><g fill="currentColor"><ellipse cx="8" cy="7" rx="3.2" ry="3.6"/><ellipse cx="16" cy="7" rx="3.2" ry="3.6"/><ellipse cx="24" cy="7" rx="3.2" ry="3.6"/><ellipse cx="8" cy="14" rx="3.2" ry="3.6"/><ellipse cx="16" cy="14" rx="3.2" ry="3.6"/><ellipse cx="24" cy="14" rx="3.2" ry="3.6"/></g><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M2 17.5h28l-2.5 4h-23z"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.2 4L19 7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.2 4L19 7"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-swoosh" viewBox="0 0 200 20" preserveAspectRatio="none"><path fill="currentColor" d="M2 16C60 8 130 4 198 3c-60 4-128 10-190 17Z"/></symbol>
   </svg>
 
   <div class="announce">
     <div class="container announce__inner">
-      <span><strong>Envío gratis</strong> desde 3 bandejas o 1 caja, dentro del Anillo Américo Vespucio.</span>
-      <span class="announce__sep" aria-hidden="true"></span>
-      <span class="announce__extra">Precio oferta por tiempo limitado</span>
+      <svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg>
+      <span><strong>Envío gratis</strong> desde 3 bandejas o por caja · Comunas de Santiago dentro del Anillo Américo Vespucio</span>
     </div>
   </div>
 
   <header class="header" id="top">
     <div class="container header__inner">
       <a href="#top" class="brand" aria-label="Avícola del Rey, inicio">
-        <svg class="brand__mark" viewBox="0 0 48 56" aria-hidden="true">
-          <path d="M11 15 15 6l6 6 3-8 3 8 6-6 4 9z" fill="var(--yolk)"/>
-          <path d="M24 17c9.4 0 17 12 17 22.3C41 48.6 33.4 54 24 54S7 48.6 7 39.3C7 29 14.6 17 24 17Z" fill="var(--ink)"/>
-          <path d="M24 29v13M19.5 33.5h9" stroke="var(--yolk)" stroke-width="2.2" stroke-linecap="round"/>
-        </svg>
+        <img class="brand__logo" src="assets/img/logo-sm.webp" alt="" width="180" height="201">
         <span class="brand__text">
-          <span class="brand__name">Avícola del Rey</span>
+          <span class="brand__name">Avícola <small>del</small> Rey</span>
           <span class="brand__tag">Huevos de gallinas ponedoras</span>
         </span>
       </a>
       <nav class="nav" aria-label="Principal">
-        <a href="#productos">Precios</a>
+        <a href="#precios">Precios</a>
         <a href="#calibres">Calibres</a>
         <a href="#despacho">Despacho</a>
         <a href="#preguntas">Preguntas</a>
@@ -84,104 +73,106 @@
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="container hero__grid">
-        <div class="hero__copy">
-          <p class="eyebrow">Santiago · Despacho a domicilio</p>
-          <h1 class="hero__title">Huevos de calidad<br>para tu mesa.</h1>
-          <p class="hero__lead">Huevos frescos de gallinas ponedoras, por bandeja para la casa o por caja para tu negocio. Eliges el calibre, armas tu pedido y lo confirmamos por WhatsApp.</p>
-          <div class="hero__actions">
-            <a href="#productos" class="btn btn--primary">Ver precios y pedir</a>
-            <a href="#calibres" class="btn btn--ghost">¿Qué calibre necesito?</a>
-          </div>
-          <dl class="hero__facts">
-            <div><dt>Desde</dt><dd>$3.900 <span>bandeja de 30</span></dd></div>
-            <div><dt>Mayorista</dt><dd>2+ cajas <span>precio rebajado</span></dd></div>
-            <div><dt>6 calibres</dt><dd>40 a 73+ g <span>por huevo</span></dd></div>
-          </dl>
+      <div class="hero__scene">
+        <div class="hero__left">
+          <h1 class="script script--hero">
+            <span>Huevos de</span>
+            <span class="script--lg">Calidad</span>
+            <span class="script--yellow">para tu mesa</span>
+          </h1>
+          <svg class="swoosh" aria-hidden="true"><use href="#i-swoosh"/></svg>
         </div>
 
-        <div class="hero__visual" aria-hidden="true">
-          <div class="tray">
-            <svg viewBox="0 0 424 348">
-              <rect x="10" y="10" width="404" height="328" rx="26" fill="#e9dfcd"/>
-              <rect x="10" y="10" width="404" height="328" rx="26" fill="none" stroke="#d6c7ad" stroke-width="2"/>
-              <g transform="translate(-8 -8)">
-                <use href="#cup" x="60" y="60"/><use href="#egg" x="60" y="60"/>
-                <use href="#cup" x="136" y="60"/><use href="#egg" x="136" y="60"/>
-                <use href="#cup" x="212" y="60"/><use href="#egg" x="212" y="60"/>
-                <use href="#cup" x="288" y="60"/><use href="#egg" x="288" y="60"/>
-                <use href="#cup" x="364" y="60"/>
-                <use href="#cup" x="60" y="136"/><use href="#egg" x="60" y="136"/>
-                <use href="#cup" x="136" y="136"/><use href="#egg" x="136" y="136"/>
-                <use href="#cup" x="212" y="136"/><use href="#egg" x="212" y="136"/>
-                <use href="#cup" x="288" y="136"/><use href="#egg" x="288" y="136"/>
-                <use href="#cup" x="364" y="136"/><use href="#egg" x="364" y="136"/>
-                <use href="#cup" x="60" y="212"/><use href="#egg" x="60" y="212"/>
-                <use href="#cup" x="136" y="212"/><use href="#egg" x="136" y="212"/>
-                <use href="#cup" x="212" y="212"/><use href="#egg" x="212" y="212"/>
-                <use href="#cup" x="288" y="212"/><use href="#egg" x="288" y="212"/>
-                <use href="#cup" x="364" y="212"/><use href="#egg" x="364" y="212"/>
-                <use href="#cup" x="60" y="288"/>
-                <use href="#cup" x="136" y="288"/><use href="#egg" x="136" y="288"/>
-                <use href="#cup" x="212" y="288"/><use href="#egg" x="212" y="288"/>
-                <use href="#cup" x="288" y="288"/><use href="#egg" x="288" y="288"/>
-                <use href="#cup" x="364" y="288"/><use href="#egg" x="364" y="288"/>
-              </g>
-            </svg>
-          </div>
-          <div class="tag">
-            <span class="tag__label">Bandeja Primera</span>
-            <span class="tag__price">$6.490</span>
-            <span class="tag__meta">30 huevos · 54–60 g</span>
-          </div>
-          <div class="stamp">
-            <span>Precio</span>
-            <strong>oferta</strong>
-            <span>tiempo limitado</span>
-          </div>
+        <div class="hero__logo">
+          <img src="assets/img/logo.webp" alt="Avícola del Rey" width="520" height="580">
         </div>
+
+        <div class="hero__right" aria-hidden="true">
+          <p class="script script--side">Nutrición,<br>Sabor y<br>Calidad</p>
+          <svg class="swoosh swoosh--sm"><use href="#i-swoosh"/></svg>
+        </div>
+      </div>
+
+      <div class="ribbon-wrap">
+        <a href="#precios" class="ribbon">Elige tu formato</a>
+        <p class="pill">Huevos de gallinas ponedoras</p>
       </div>
     </section>
 
-    <!-- PRODUCTOS -->
-    <section class="section" id="productos">
+    <!-- PRECIOS -->
+    <section class="section section--board" id="precios">
       <div class="container">
-        <div class="section__head">
+
+        <!-- Cajas -->
+        <div class="board" data-boxes-board>
+          <div class="board__head board__head--boxes">
+            <h2 class="board__title"><svg class="icon"><use href="#i-box"/></svg>Cajas</h2>
+            <div class="col-tag col-tag--wh" data-col="wholesale">Mayorista<small>(desde 2 cajas)</small></div>
+            <div class="col-tag col-tag--rt" data-col="retail">Detalle<small>(1 caja)</small></div>
+            <span class="board__spacer" aria-hidden="true"></span>
+          </div>
+          <div class="box-list" data-products="cajas"></div>
+          <p class="board__note">Llevando 2 cajas o más (de cualquier calibre), <strong>todas pasan a precio mayorista</strong>. Las cajas siempre tienen envío gratis.</p>
+        </div>
+
+        <!-- Bandejas -->
+        <div class="board">
+          <div class="board__head">
+            <h2 class="board__title"><svg class="icon icon--tray"><use href="#i-tray"/></svg>Bandejas</h2>
+            <p class="board__sub">Desde 3 bandejas, <strong>envío gratis</strong></p>
+          </div>
+          <div class="tray-grid" data-products="bandejas"></div>
+        </div>
+
+        <!-- Beneficios -->
+        <div class="perks">
+          <div class="perk">
+            <svg class="perk__icon perk__icon--truck" aria-hidden="true"><use href="#i-truck"/></svg>
+            <div>
+              <span class="perk__kicker">Desde 3 bandejas</span>
+              <span class="perk__tag">Envío gratis</span>
+            </div>
+          </div>
+          <div class="perk">
+            <svg class="perk__icon" aria-hidden="true"><use href="#i-box"/></svg>
+            <div>
+              <span class="perk__kicker">Por caja</span>
+              <span class="perk__tag">Envío gratis</span>
+            </div>
+          </div>
+          <div class="perk">
+            <svg class="perk__icon" aria-hidden="true"><use href="#i-pin"/></svg>
+            <div>
+              <span class="perk__kicker perk__kicker--plain">Comunas de Santiago</span>
+              <span class="perk__small">dentro del Anillo de Vespucio</span>
+            </div>
+          </div>
+        </div>
+
+        <noscript><p class="board__note">Activa JavaScript para armar tu pedido, o revisa nuestro <a href="assets/flyer.jpg">afiche de precios</a>.</p></noscript>
+      </div>
+    </section>
+
+    <!-- OFERTA -->
+    <section class="offer">
+      <div class="container offer__inner">
+        <div class="offer__banner">
+          <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
           <div>
-            <p class="eyebrow">Elige tu formato</p>
-            <h2 class="section__title">Lista de precios</h2>
-          </div>
-          <div class="tabs" role="tablist" aria-label="Formato">
-            <button class="tabs__btn is-active" role="tab" aria-selected="true" aria-controls="panel-bandejas" id="tab-bandejas" data-tab="bandejas">Bandejas</button>
-            <button class="tabs__btn" role="tab" aria-selected="false" aria-controls="panel-cajas" id="tab-cajas" data-tab="cajas" tabindex="-1">Cajas</button>
+            <strong>¡Precio oferta!</strong>
+            <span>Por tiempo limitado</span>
           </div>
         </div>
-
-        <div class="panel" id="panel-bandejas" role="tabpanel" aria-labelledby="tab-bandejas">
-          <p class="panel__note">Para la casa, el almacén o la amasandería. <strong>Desde 3 bandejas el envío es gratis.</strong></p>
-          <div class="grid grid--trays" data-products="bandejas"></div>
-        </div>
-
-        <div class="panel" id="panel-cajas" role="tabpanel" aria-labelledby="tab-cajas" hidden>
-          <p class="panel__note">Para restaurantes, pastelerías y reventa. <strong>Llevando 2 cajas o más, todas pasan a precio mayorista</strong> y el envío siempre es gratis.</p>
-          <div class="price-legend" aria-hidden="true">
-            <span><i class="dot dot--wh"></i>Mayorista · desde 2 cajas</span>
-            <span><i class="dot dot--rt"></i>Detalle · 1 caja</span>
-          </div>
-          <div class="grid grid--boxes" data-products="cajas"></div>
-        </div>
-
-        <noscript><p class="panel__note">Activa JavaScript para armar tu pedido, o revisa nuestro <a href="assets/flyer.jpg">afiche de precios</a>.</p></noscript>
+        <a href="#precios" class="btn btn--gold" data-open-cart-if-items>Hacer mi pedido</a>
       </div>
     </section>
 
     <!-- CALIBRES -->
-    <section class="section section--alt" id="calibres">
+    <section class="section" id="calibres">
       <div class="container">
-        <div class="section__head section__head--stack">
-          <p class="eyebrow">Guía de calibres</p>
-          <h2 class="section__title">El calibre es el peso de cada huevo.</h2>
-          <p class="section__lead">Todos nuestros huevos son de la misma calidad; lo que cambia es el tamaño. Elige según el uso que les vas a dar.</p>
+        <div class="heading">
+          <h2 class="ribbon ribbon--static">Guía de calibres</h2>
+          <p class="heading__lead">Todos nuestros huevos son de la misma calidad: lo que cambia es el peso de cada uno. Elige según el uso que les darás.</p>
         </div>
         <div class="scale" data-scale></div>
         <p class="scale__foot">Ilustración referencial. Rangos de peso por unidad.</p>
@@ -189,11 +180,10 @@
     </section>
 
     <!-- DESPACHO -->
-    <section class="section" id="despacho">
+    <section class="section section--wood" id="despacho">
       <div class="container despacho">
         <div>
-          <p class="eyebrow">Cómo funciona</p>
-          <h2 class="section__title">Pedir es simple.</h2>
+          <h2 class="title-gold">Pedir es simple</h2>
           <ol class="steps">
             <li>
               <span class="steps__n">1</span>
@@ -201,11 +191,11 @@
             </li>
             <li>
               <span class="steps__n">2</span>
-              <div><h3>Envíalo por WhatsApp</h3><p>Completa tu dirección y te llega un mensaje listo para enviar. Confirmamos stock, horario y forma de pago.</p></div>
+              <div><h3>Envíalo por WhatsApp</h3><p>Completa tu dirección y se abre un mensaje listo para enviar. Confirmamos stock, horario y forma de pago.</p></div>
             </li>
             <li>
               <span class="steps__n">3</span>
-              <div><h3>Recíbelo en tu puerta</h3><p>Despachamos a comunas de Santiago dentro del Anillo Américo Vespucio, gratis desde 3 bandejas o 1 caja.</p></div>
+              <div><h3>Recíbelo en tu puerta</h3><p>Despachamos a comunas de Santiago dentro del Anillo Américo Vespucio, gratis desde 3 bandejas o por caja.</p></div>
             </li>
           </ol>
         </div>
@@ -215,7 +205,7 @@
             <svg class="icon icon--lg"><use href="#i-pin"/></svg>
             <div>
               <h3>¿Llegamos a tu comuna?</h3>
-              <p>Revisa si tu dirección está dentro de la zona de envío gratis.</p>
+              <p>Revisa si tu dirección está en la zona de envío gratis.</p>
             </div>
           </div>
           <label class="field">
@@ -230,13 +220,12 @@
     </section>
 
     <!-- PREGUNTAS -->
-    <section class="section section--alt" id="preguntas">
+    <section class="section" id="preguntas">
       <div class="container faq">
         <div>
-          <p class="eyebrow">Preguntas frecuentes</p>
-          <h2 class="section__title">Lo que más nos consultan.</h2>
-          <p class="section__lead">¿Tienes otra duda? Escríbenos y te respondemos a la brevedad.</p>
-          <a class="btn btn--ghost" data-whatsapp-link href="#" target="_blank" rel="noopener">
+          <h2 class="title-gold">Preguntas frecuentes</h2>
+          <p class="heading__lead">¿Tienes otra duda? Escríbenos y te respondemos a la brevedad.</p>
+          <a class="btn btn--whatsapp" data-whatsapp-link href="#" target="_blank" rel="noopener">
             <svg class="icon"><use href="#i-whatsapp"/></svg>Escribir por WhatsApp
           </a>
         </div>
@@ -255,7 +244,7 @@
           </details>
           <details>
             <summary>¿Cómo pago?</summary>
-            <p>Al enviar tu pedido por WhatsApp te indicamos los datos para transferencia o puedes pagar en efectivo al recibir. Indica tu preferencia en el formulario del pedido.</p>
+            <p>Al enviar tu pedido por WhatsApp te indicamos los datos para transferencia, o puedes pagar en efectivo al recibir. Indica tu preferencia en el formulario del pedido.</p>
           </details>
           <details>
             <summary>¿Los precios pueden cambiar?</summary>
@@ -269,8 +258,8 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <span class="brand__name">Avícola del Rey</span>
-        <p>Nutrición, sabor y calidad. Gracias por preferirnos.</p>
+        <img src="assets/img/logo-sm.webp" alt="Avícola del Rey" width="90" height="100">
+        <p class="script script--thanks">Gracias<br>por preferirnos</p>
       </div>
       <div class="footer__cols">
         <div>
@@ -280,19 +269,19 @@
         </div>
         <div>
           <h4>Despacho</h4>
-          <span>Santiago, dentro del Anillo Américo Vespucio</span>
+          <span>Santiago, dentro del<br>Anillo Américo Vespucio</span>
         </div>
       </div>
     </div>
     <div class="container footer__legal">
-      <span>© <span data-year></span> Avícola del Rey</span>
-      <span>Precios en pesos chilenos (CLP), IVA incluido. Sujetos a stock.</span>
+      <span>© <span data-year></span> Avícola del Rey · Nutrición, sabor y calidad</span>
+      <span>Precios en pesos chilenos (CLP). Sujetos a stock.</span>
     </div>
   </footer>
 
   <!-- Barra móvil -->
   <button class="mobile-bar" type="button" data-open-cart hidden>
-    <span><span data-cart-count>0</span> productos · <strong data-cart-total>$0</strong></span>
+    <span><span data-cart-items>0 productos</span> · <strong data-cart-total>$0</strong></span>
     <span class="mobile-bar__cta">Ver pedido</span>
   </button>
 
@@ -309,9 +298,9 @@
 
       <div class="drawer__body">
         <div class="cart-empty" data-cart-empty>
-          <svg viewBox="0 0 100 130" class="cart-empty__egg" aria-hidden="true"><path d="M50 4C76 4 94 50 94 82c0 27-19 44-44 44S6 109 6 82C6 50 24 4 50 4Z"/></svg>
+          <img src="assets/img/logo-sm.webp" alt="" width="90" height="100">
           <p>Tu pedido está vacío.</p>
-          <button class="btn btn--ghost btn--sm" type="button" data-close-cart>Ver productos</button>
+          <button class="btn btn--outline btn--sm" type="button" data-close-cart>Ver productos</button>
         </div>
 
         <ul class="cart-list" data-cart-list></ul>
@@ -348,7 +337,7 @@
         </form>
       </div>
 
-      <div class="drawer__foot" data-cart-foot>
+      <div class="drawer__foot">
         <dl class="totals">
           <div><dt>Subtotal</dt><dd data-subtotal>$0</dd></div>
           <div class="totals__save" data-savings-row hidden><dt>Ahorro mayorista</dt><dd data-savings>$0</dd></div>
