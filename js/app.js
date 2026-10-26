@@ -9,6 +9,10 @@
   // Ejemplo: '56912345678'. Si queda vacío, WhatsApp pedirá elegir el contacto.
   const WHATSAPP_NUMBER = '';
 
+  // Pago con tarjeta vía Klap. Por ahora es solo una maqueta: no está conectado
+  // a Klap, simula el pago y luego envía el pedido por WhatsApp.
+  const KLAP_PAYMENT = 'Tarjeta vía Klap';
+
   const FREE_SHIPPING_TRAYS = 3;
   const WHOLESALE_MIN_BOXES = 2;
 
@@ -90,6 +94,8 @@
   };
 
   const productName = p => `${p.type === 'tray' ? 'Bandeja' : 'Caja'} ${CALIBRES[p.cal].name}`;
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ------------------------------------------------------------------
      Estado del pedido
@@ -231,13 +237,90 @@
     if (e.target.closest('[data-add]')) {
       setQty(id, 1);
       $('[data-inc]', card)?.focus();
+      layEgg();
     } else if (e.target.closest('[data-inc]')) {
       setQty(id, (cart[id] || 0) + 1);
+      layEgg();
     } else if (e.target.closest('[data-dec]')) {
       setQty(id, (cart[id] || 0) - 1);
       if (!cart[id]) $('[data-add]', card)?.focus();
     }
   });
+
+  /* ------------------------------------------------------------------
+     Gallina animada
+     ------------------------------------------------------------------ */
+
+  const hen = $('[data-hen]');
+  const henEggs = $('[data-hen-eggs]');
+  const henBubble = $('[data-hen-bubble]');
+  const HEN_SAYS = ['¡Pok!', '¡Cocorocó!', '¡Uno más!', '¡Fresquito!'];
+  // Donde quedan los huevos dentro del nido (coordenadas del SVG)
+  const EGG_SPOTS = [[158, 126], [176, 129], [141, 130]];
+  let eggsLaid = 0;
+  let laying = false;
+
+  function layEgg() {
+    if (!hen || laying) return;
+    laying = true;
+    hen.classList.add('is-laying');
+
+    henBubble.textContent = HEN_SAYS[eggsLaid % HEN_SAYS.length];
+    henBubble.classList.remove('is-visible');
+    void henBubble.offsetWidth;
+    henBubble.classList.add('is-visible');
+
+    setTimeout(() => {
+      const [x, y] = EGG_SPOTS[eggsLaid % EGG_SPOTS.length];
+      const egg = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      egg.setAttribute('class', 'hen__egg');
+      egg.innerHTML = '<ellipse rx="10" ry="12.5" fill="url(#g-shell)"/><ellipse cx="-3.5" cy="-4.5" rx="2.8" ry="4" fill="#fff" opacity=".35"/>';
+      henEggs.appendChild(egg);
+      if (henEggs.children.length > EGG_SPOTS.length) {
+        const old = henEggs.firstElementChild;
+        old.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300 }).onfinish = () => old.remove();
+      }
+      eggsLaid++;
+      if (reduceMotion) {
+        egg.style.transform = `translate(${x}px, ${y}px)`;
+        return;
+      }
+      egg.animate([
+        { transform: 'translate(136px, 112px) scale(.3)', opacity: 0 },
+        { transform: 'translate(140px, 120px) scale(1)', opacity: 1, offset: .25 },
+        { transform: `translate(${(140 + x) / 2}px, ${y - 12}px) rotate(120deg)`, offset: .55 },
+        { transform: `translate(${x}px, ${y}px) rotate(300deg)`, offset: .8 },
+        { transform: `translate(${x}px, ${y - 3}px) rotate(330deg)`, offset: .9 },
+        { transform: `translate(${x}px, ${y}px) rotate(360deg)` },
+      ], { duration: 900, easing: 'ease-out', fill: 'forwards' });
+    }, reduceMotion ? 0 : 600);
+
+    setTimeout(() => {
+      hen.classList.remove('is-laying');
+      laying = false;
+    }, reduceMotion ? 300 : 1300);
+  }
+
+  if (hen) {
+    hen.addEventListener('click', layEgg);
+    // Cuando la gallina está a la vista, pone un huevo de vez en cuando
+    let henVisible = false;
+    new IntersectionObserver(([entry]) => { henVisible = entry.isIntersecting; }).observe(hen);
+    if (!reduceMotion) setInterval(() => { if (henVisible && !document.hidden) layEgg(); }, 9000);
+  }
+
+  /* ------------------------------------------------------------------
+     Banner: partículas doradas
+     ------------------------------------------------------------------ */
+
+  const dust = $('[data-dust]');
+  if (dust && !reduceMotion) {
+    dust.innerHTML = Array.from({ length: 18 }, () => {
+      const size = (2 + Math.random() * 4).toFixed(1);
+      return `<i style="left:${(Math.random() * 100).toFixed(1)}%;width:${size}px;height:${size}px;` +
+        `animation-duration:${(7 + Math.random() * 8).toFixed(1)}s;animation-delay:-${(Math.random() * 12).toFixed(1)}s"></i>`;
+    }).join('');
+  }
 
   /* ------------------------------------------------------------------
      Guía de calibres
@@ -386,6 +469,7 @@
     $('[data-savings]').textContent = '−' + clp(s.savings);
     $('[data-shipping]').textContent = ship.label;
     $('[data-total]').textContent = clp(s.subtotal);
+    renderPayButton(s);
   }
 
   function render() {
@@ -423,7 +507,19 @@
     a.href = waLink('Hola Avícola del Rey, tengo una consulta.');
   });
 
-  $('[data-send-order]').addEventListener('click', () => {
+  const isKlap = () => form.elements.pago.value === KLAP_PAYMENT;
+
+  function renderPayButton(s = summary()) {
+    const klap = isKlap();
+    $('[data-klap-note]').hidden = !klap;
+    $('[data-send-label]').textContent = klap ? `Pagar con Klap · ${clp(s.subtotal)}` : 'Enviar pedido por WhatsApp';
+    $('[data-send-icon] use').setAttribute('href', klap ? '#i-lock' : '#i-whatsapp');
+    $('[data-send-order]').classList.toggle('btn--klap', klap);
+  }
+  form.addEventListener('change', e => { if (e.target.name === 'pago') renderPayButton(); });
+
+  // Valida el formulario y devuelve los datos, o null si falta algo
+  function readForm() {
     const errorEl = $('[data-form-error]');
     const data = Object.fromEntries(new FormData(form));
     const missing = ['nombre', 'direccion', 'comuna'].filter(k => !String(data[k] || '').trim());
@@ -434,14 +530,17 @@
     if (missing.length) {
       errorEl.textContent = 'Completa tu nombre, dirección y comuna para enviar el pedido.';
       form.elements[missing[0]].focus();
-      return;
+      return null;
     }
     errorEl.textContent = '';
 
     store.set('adr-customer', {
       nombre: data.nombre, direccion: data.direccion, comuna: data.comuna, pago: data.pago,
     });
+    return data;
+  }
 
+  function sendOrder(data, payment) {
     const s = summary();
     const ship = shippingInfo(s);
     const comuna = data.comuna === OTHER ? 'Otra comuna (indicar)' : data.comuna;
@@ -460,11 +559,56 @@
       '',
       `Nombre: ${data.nombre.trim()}`,
       `Dirección: ${data.direccion.trim()}, ${comuna}`,
-      `Pago: ${data.pago}`,
+      `Pago: ${payment}`,
       data.notas.trim() ? `Comentarios: ${data.notas.trim()}` : null,
     ].filter(l => l !== null);
 
     window.open(waLink(lines.join('\n')), '_blank', 'noopener');
+  }
+
+  /* ---------- Klap (maqueta) ---------- */
+
+  const klap = $('[data-klap]');
+  let klapOrder = null;
+  let klapTimer = null;
+
+  function klapStep(name) {
+    $$('[data-klap-step]', klap).forEach(el => { el.hidden = el.dataset.klapStep !== name; });
+  }
+
+  function openKlap(data) {
+    const s = summary();
+    klapOrder = data;
+    klapStep('review');
+    $$('[data-klap-total]', klap).forEach(el => { el.textContent = clp(s.subtotal); });
+    $('[data-klap-items]', klap).textContent = `${s.items} producto${s.items === 1 ? '' : 's'}`;
+    klap.showModal();
+  }
+
+  $('[data-klap-pay]').addEventListener('click', () => {
+    klapStep('processing');
+    klapTimer = setTimeout(() => {
+      $('[data-klap-code]', klap).textContent = 'DEMO-' + String(Math.floor(100000 + Math.random() * 900000));
+      klapStep('done');
+      $('[data-klap-finish]', klap).focus();
+    }, 1800);
+  });
+
+  $('[data-klap-finish]').addEventListener('click', () => {
+    const method = klap.querySelector('[name="klap-method"]:checked').value.toLowerCase();
+    sendOrder(klapOrder, `${KLAP_PAYMENT} (${method}) · pago simulado, sin cobro real`);
+    klap.close();
+  });
+
+  $('[data-klap-close]').addEventListener('click', () => klap.close());
+  klap.addEventListener('close', () => clearTimeout(klapTimer));
+  klap.addEventListener('click', e => { if (e.target === klap) klap.close(); });
+
+  $('[data-send-order]').addEventListener('click', () => {
+    const data = readForm();
+    if (!data) return;
+    if (data.pago === KLAP_PAYMENT) openKlap(data);
+    else sendOrder(data, data.pago);
   });
 
   $('[data-year]').textContent = new Date().getFullYear();

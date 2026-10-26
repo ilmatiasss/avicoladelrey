@@ -9,6 +9,8 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias) para vender huevos po
 - Reglas de **envío gratis** (3+ bandejas o 1+ caja, dentro del Anillo Américo Vespucio).
 - Verificador de comuna y guía de calibres.
 - Carrito que se guarda en el navegador y envío del pedido por WhatsApp.
+- Pago con tarjeta vía **Klap** como **maqueta**: simula el checkout (sin cobro ni datos de tarjeta) y luego envía el pedido por WhatsApp indicando que el pago fue simulado.
+- Gallina animada que pone un huevo al agregar productos (o al hacerle clic) y banner principal animado. Las animaciones se desactivan si el sistema tiene activada la opción de reducir movimiento.
 
 ## Configuración
 
@@ -17,6 +19,7 @@ Edita la parte superior de `js/app.js`:
 - `WHATSAPP_NUMBER`: número que recibe los pedidos, formato internacional sin `+` (ej. `56912345678`).
 - `TRAYS` y `BOXES`: precios y productos.
 - `COMUNAS_IN` y `COMUNAS_PARTIAL`: zona de despacho.
+- `KLAP_PAYMENT`: nombre del medio de pago con tarjeta. Para conectar Klap de verdad, reemplaza la simulación en `openKlap` / `data-klap-pay` por la creación de la orden en la API de Klap (requiere un backend para guardar las credenciales del comercio).
 
 ## Imágenes
 

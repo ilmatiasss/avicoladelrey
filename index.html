@@ -37,6 +37,8 @@
     <symbol id="i-close" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.2 4L19 7"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 9.5h19" stroke="currentColor" stroke-width="2.4"/><path d="M6 15h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
     <symbol id="i-swoosh" viewBox="0 0 200 20" preserveAspectRatio="none"><path fill="currentColor" d="M2 16C60 8 130 4 198 3c-60 4-128 10-190 17Z"/></symbol>
   </svg>
 
@@ -83,7 +85,10 @@
           <svg class="swoosh" aria-hidden="true"><use href="#i-swoosh"/></svg>
         </div>
 
+        <div class="hero__dust" data-dust aria-hidden="true"></div>
+
         <div class="hero__logo">
+          <span class="hero__rays" aria-hidden="true"></span>
           <img src="assets/img/logo.webp" alt="Avícola del Rey" width="520" height="580">
         </div>
 
@@ -116,7 +121,56 @@
         </div>
 
         <!-- Bandejas -->
-        <div class="board">
+        <div class="board board--hen">
+          <!-- Gallina animada: pone un huevo al agregar productos o al hacerle clic -->
+          <div class="hen" data-hen title="¡Haz clic y pondrá un huevo!">
+            <span class="hen__bubble" data-hen-bubble></span>
+            <svg class="hen__svg" viewBox="0 0 200 170" aria-hidden="true">
+              <defs>
+                <linearGradient id="hen-body" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#c0702f"/>
+                  <stop offset="1" stop-color="#7a3a14"/>
+                </linearGradient>
+                <linearGradient id="hen-neck" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#c77a38"/>
+                  <stop offset="1" stop-color="#8f461a"/>
+                </linearGradient>
+              </defs>
+              <!-- nido (parte trasera) -->
+              <ellipse cx="104" cy="134" rx="90" ry="22" fill="#4a2e14"/>
+              <path d="M18 132c20-8 50-12 86-12s66 4 86 12" fill="none" stroke="#a87336" stroke-width="3" stroke-linecap="round"/>
+              <g class="hen__body">
+                <!-- cola -->
+                <g class="hen__tail">
+                  <path d="M138 94c8-30 26-52 44-60-4 18 2 30-6 46 10-6 18-2 16 6-12 14-32 22-54 26Z" fill="#5a2a10"/>
+                  <path d="M140 96c10-22 24-38 36-44-2 14 0 24-6 36 6-2 10 0 10 4-10 10-24 14-40 16Z" fill="#8b4a1f"/>
+                </g>
+                <!-- cuerpo -->
+                <path d="M44 106c-4-30 18-50 52-50 34 0 60 16 64 42 3 24-20 40-60 40-34 0-54-12-56-32Z" fill="url(#hen-body)"/>
+                <!-- ala -->
+                <path d="M80 90c20-14 56-12 70 8-10 20-38 26-58 18-12-6-16-16-12-26Z" fill="#8e4a1c"/>
+                <path d="M92 100c14-6 32-6 46 0M96 108c12-4 26-4 38 0" fill="none" stroke="#6a3210" stroke-width="2.4" stroke-linecap="round"/>
+                <!-- cabeza -->
+                <g class="hen__head">
+                  <path d="M52 98c-6-20-2-44 14-52 16-6 26 8 22 26-2 12-8 22-16 30Z" fill="url(#hen-neck)"/>
+                  <circle cx="62" cy="46" r="17" fill="#a65a24"/>
+                  <path d="M50 32c-2-10 6-12 8-4 0-12 10-12 10-2 2-10 12-6 8 4-4 4-20 6-26 2Z" fill="#e0302a"/>
+                  <ellipse cx="54" cy="47" rx="9" ry="8" fill="#d94a33"/>
+                  <path d="M46 44 30 50l16 5Z" fill="#f2b632"/>
+                  <path d="M44 55c-2 10 6 14 8 4Z" fill="#d8261c"/>
+                  <circle cx="56" cy="43" r="3.6" fill="#1a0d05"/>
+                  <circle cx="55" cy="42" r="1.2" fill="#fff"/>
+                  <ellipse class="hen__lid" cx="56" cy="43" rx="4.6" ry="4.6" fill="#d94a33"/>
+                </g>
+              </g>
+              <!-- huevos -->
+              <g class="hen__eggs" data-hen-eggs></g>
+              <!-- nido (parte delantera) -->
+              <path d="M14 132c26 22 154 22 180 0-4 26-40 34-90 34s-86-8-90-34Z" fill="#8a5a2b"/>
+              <path d="M24 140c30 10 120 12 160-2M30 150c34 8 110 8 148-4M44 158c30 4 90 4 118-2" fill="none" stroke="#c9954f" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M18 134l14 6M176 136l-10 8M60 146l18-2M120 152l20-4" stroke="#5d3a17" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
           <div class="board__head">
             <h2 class="board__title"><svg class="icon icon--tray"><use href="#i-tray"/></svg>Bandejas</h2>
             <p class="board__sub">Desde 3 bandejas, <strong>envío gratis</strong></p>
@@ -244,7 +298,7 @@
           </details>
           <details>
             <summary>¿Cómo pago?</summary>
-            <p>Al enviar tu pedido por WhatsApp te indicamos los datos para transferencia, o puedes pagar en efectivo al recibir. Indica tu preferencia en el formulario del pedido.</p>
+            <p>Puedes pagar con tarjeta de débito, crédito o prepago a través de Klap (próximamente), por transferencia o en efectivo al recibir. Elige tu preferencia en el formulario del pedido.</p>
           </details>
           <details>
             <summary>¿Los precios pueden cambiar?</summary>
@@ -266,6 +320,12 @@
           <h4>Pedidos</h4>
           <a data-whatsapp-link href="#" target="_blank" rel="noopener">WhatsApp</a>
           <a href="assets/flyer.jpg" target="_blank" rel="noopener">Afiche de precios</a>
+        </div>
+        <div>
+          <h4>Medios de pago</h4>
+          <span>Tarjetas vía Klap</span>
+          <span>Transferencia</span>
+          <span>Efectivo al recibir</span>
         </div>
         <div>
           <h4>Despacho</h4>
@@ -325,10 +385,12 @@
           </label>
           <fieldset class="field">
             <legend class="field__label">Forma de pago</legend>
-            <div class="seg">
+            <div class="seg seg--3">
+              <label><input type="radio" name="pago" value="Tarjeta vía Klap"><span><svg class="icon"><use href="#i-card"/></svg>Tarjeta</span></label>
               <label><input type="radio" name="pago" value="Transferencia" checked><span>Transferencia</span></label>
               <label><input type="radio" name="pago" value="Efectivo al recibir"><span>Efectivo</span></label>
             </div>
+            <p class="pay-note" data-klap-note hidden>Débito, crédito o prepago con <b>Klap</b>. <span class="demo-tag">Demo</span></p>
           </fieldset>
           <label class="field">
             <span class="field__label">Comentarios <em>(opcional)</em></span>
@@ -346,12 +408,57 @@
         </dl>
         <p class="form-error" data-form-error role="alert"></p>
         <button class="btn btn--whatsapp btn--block" type="button" data-send-order>
-          <svg class="icon"><use href="#i-whatsapp"/></svg>Enviar pedido por WhatsApp
+          <svg class="icon" data-send-icon><use href="#i-whatsapp"/></svg><span data-send-label>Enviar pedido por WhatsApp</span>
         </button>
         <p class="drawer__fine">Te confirmaremos stock y horario antes de despachar.</p>
       </div>
     </aside>
   </div>
+
+  <!-- PAGO CON KLAP (maqueta: aún no está conectado a Klap) -->
+  <dialog class="klap" data-klap aria-labelledby="klap-title">
+    <div class="klap__head">
+      <span class="klap__brand">klap<small>checkout</small></span>
+      <span class="demo-tag">Demo</span>
+      <button class="icon-btn" type="button" data-klap-close aria-label="Cerrar">
+        <svg class="icon"><use href="#i-close"/></svg>
+      </button>
+    </div>
+
+    <div class="klap__step" data-klap-step="review">
+      <p class="klap__demo">Esta es una <b>maqueta</b>: el pago con Klap aún no está habilitado. No se realiza ningún cobro y no se piden datos de tarjeta.</p>
+      <h2 id="klap-title" class="klap__title">Pagar a Avícola del Rey</h2>
+      <dl class="klap__summary">
+        <div><dt>Detalle</dt><dd data-klap-items></dd></div>
+        <div class="klap__amount"><dt>Total a pagar</dt><dd data-klap-total></dd></div>
+      </dl>
+      <fieldset class="klap__methods">
+        <legend>Elige cómo pagar</legend>
+        <label><input type="radio" name="klap-method" value="Débito" checked><span><svg class="icon"><use href="#i-card"/></svg>Débito</span></label>
+        <label><input type="radio" name="klap-method" value="Crédito"><span><svg class="icon"><use href="#i-card"/></svg>Crédito</span></label>
+        <label><input type="radio" name="klap-method" value="Prepago"><span><svg class="icon"><use href="#i-card"/></svg>Prepago</span></label>
+      </fieldset>
+      <button class="btn klap__pay" type="button" data-klap-pay>
+        <svg class="icon"><use href="#i-lock"/></svg>Pagar <span data-klap-total></span>
+      </button>
+      <p class="klap__fine">Al integrar Klap, aquí se redirigirá al checkout seguro de Klap.</p>
+    </div>
+
+    <div class="klap__step klap__step--center" data-klap-step="processing" hidden>
+      <span class="klap__spinner" aria-hidden="true"></span>
+      <p class="klap__title">Procesando pago…</p>
+      <p class="klap__fine">Simulación: no se realiza ningún cobro.</p>
+    </div>
+
+    <div class="klap__step klap__step--center" data-klap-step="done" hidden>
+      <span class="klap__ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
+      <p class="klap__title">Pago simulado exitoso</p>
+      <p class="klap__fine">Código de prueba: <b data-klap-code></b></p>
+      <button class="btn btn--whatsapp btn--block" type="button" data-klap-finish>
+        <svg class="icon"><use href="#i-whatsapp"/></svg>Enviar pedido por WhatsApp
+      </button>
+    </div>
+  </dialog>
 
   <script src="js/app.js"></script>
 </body>
